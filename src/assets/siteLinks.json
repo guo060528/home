@@ -10,9 +10,9 @@
     "link": "https://soanyftg.ap-southeast-1.clawcloudrun.com/"
   },
   {
-    "icon": "CompactDisc",
-    "name": "音乐",
-    "link": "https://  "
+    "icon": "MailBulk",
+    "name": "邮件",
+    "link": "https:/mail.guo0528.dpdns.org/  "
   },
   {
     "icon": "Compass",
@@ -30,7 +30,7 @@
     "link": "https://vvjensye.ap-southeast-1.clawcloudrun.com/"
   },
   {
-    "icon": "Fire",
+    "icon": "PhotoVideo",
     "name": "图床",
     "link": "https://img.guo0528.dpdns.org/"
   }
