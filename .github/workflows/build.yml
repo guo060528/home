@@ -1,12 +1,14 @@
 # Dev 分支推送部署预览
-## 仅部署 Win 端
+# 仅部署 Win 端
 name: Build Dev
 
 on:
   push:
     branches:
       - dev
+      - dev1      
       - master
+  workflow_dispatch:  # ✅ 可选，允许你在 GitHub 网页手动运行
 
 jobs:
   release:
