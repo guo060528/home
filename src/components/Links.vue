@@ -64,12 +64,12 @@ const siteLinksList = computed(() => {
 // 网站链接图标
 const siteIcon = {
   Blog,
-  Cloud,
   MailBulk,
   Compass,
   Book,
   PhotoVideo,
-  LaptopCode,
+  Unlink,
+  Cloud,
 };
 
 // 链接跳转
