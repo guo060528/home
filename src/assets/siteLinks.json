@@ -5,11 +5,6 @@
     "link": "https://oioi.rf.gd/"
   },
   {
-    "icon": "Cloud",
-    "name": "网盘",
-    "link": "https://uojybvwu.eu-central-1.clawcloudrun.com/"
-  },
-  {
     "icon": "MailBulk",
     "name": "邮件",
     "link": "https://mail.guo0528.dpdns.org/"
@@ -30,8 +25,13 @@
     "link": "https://img.guo0528.dpdns.org/"
   },
   {
-    "icon": "LaptopCode",
+    "icon": "Unlink",
     "name": "Code",
-    "link": "https://"
+    "link": "https://gax.qzz.io/dashboard/login/"
+  },
+  {
+    "icon": "Cloud",
+    "name": "网盘",
+    "link": "https:"
   }
 ]
