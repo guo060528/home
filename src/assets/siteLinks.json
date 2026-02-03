@@ -2,12 +2,12 @@
   {
     "icon": "Blog",
     "name": "博客",
-    "link": "https://oioi.rf.gd/"
+    "link": "https://blog.guo0528.dpdns.org/"
   },
   {
     "icon": "Cloud",
     "name": "网盘",
-    "link": "https://"
+    "link": "https://pan.guo0528.dpdns.org/"
   },
   {
     "icon": "MailBulk",
@@ -16,13 +16,13 @@
   },
   {
     "icon": "Compass",
-    "name": "起始页",
+    "name": "GitHub",
     "link": "https://guo060528.github.io/"
   },
   {
     "icon": "Book",
     "name": "笔记",
-    "link": "https://note.guo0528.dpdns.org/"
+    "link": "https://rin.guo0528.dpdns.org/"
   },
   {
     "icon": "PhotoVideo",
