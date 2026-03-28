@@ -1,32 +1,32 @@
 [
   {
     "icon": "Blog",
-    "name": "博客",
+    "name": "BLog",
     "link": "https://blog.guo0528.dpdns.org/"
   },
   {
     "icon": "Cloud",
-    "name": "网盘",
+    "name": "CLoud",
     "link": "https://pan.guo0528.dpdns.org/"
   },
   {
     "icon": "MailBulk",
-    "name": "邮件",
+    "name": "Mail",
     "link": "https://mail.guo0528.dpdns.org/"
   },
   {
     "icon": "Compass",
-    "name": "GitHub",
-    "link": "https://guo060528.github.io/"
+    "name": "Paste",
+    "link": "https://paste.guo0528.dpdns.org/"
   },
   {
     "icon": "Book",
-    "name": "笔记",
+    "name": "Rin",
     "link": "https://rin.guo0528.dpdns.org/"
   },
   {
     "icon": "PhotoVideo",
-    "name": "图床",
+    "name": "Imgbad",
     "link": "https://img.guo0528.dpdns.org/"
   },
   {
