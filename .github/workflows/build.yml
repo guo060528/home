@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - dev
-      - dev-new
       - master
   workflow_dispatch:  # ✅ 可选，允许你在 GitHub 网页手动运行
 
