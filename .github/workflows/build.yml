@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - dev
-      - dev-new      
+      - dev-new
       - master
   workflow_dispatch:  # ✅ 可选，允许你在 GitHub 网页手动运行
 
@@ -18,12 +18,15 @@ jobs:
     steps:
       # 检出 Git 仓库
       - name: Check out git repository
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4
+
       # 安装 Node.js
       - name: Install Node.js
-        uses: actions/setup-node@v4.0.0
+        uses: actions/setup-node@v4
         with:
-          node-version: "18.x"
+          node-version: "20.x"
+          cache: 'npm'
+
       # 复制环境变量文件
       - name: Copy .env.example
         run: |
@@ -32,14 +35,17 @@ jobs:
           } else {
             Write-Host ".env file already exists. Skipping the copy step."
           }
+
       # 安装项目依赖
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
+
       # 构建程序
       - name: Build Website
         run: npm run build
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
       # 上传构建产物
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

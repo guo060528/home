@@ -57,7 +57,7 @@ const siteUrl = computed(() => {
       top: 43.26px; // 721px * 0.06
     }
     @media (max-width: 390px) {
-        width: 391px;
+      width: 391px;
     }
   }
   @media (max-width: 720px) {
