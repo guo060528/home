@@ -17,8 +17,8 @@ import Func from "@/views/Func/index.vue";
 import Link from "@/components/Links.vue";
 const store = mainStore();
 
-// 站点名称（移动端大字 Logo）
-const siteName = import.meta.env.VITE_SITE_NAME || "GuoAnxin";
+// 站点名称（移动端大字 Logo，显示为小写）
+const siteName = (import.meta.env.VITE_SITE_NAME || "GuoAnxin").toLowerCase();
 </script>
 
 <style lang="scss" scoped>

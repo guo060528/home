@@ -37,8 +37,8 @@ const store = mainStore();
 
 // 主页站点logo
 const siteLogo = import.meta.env.VITE_SITE_MAIN_LOGO;
-// 站点名称（头像旁大字 Logo）
-const siteName = import.meta.env.VITE_SITE_NAME || "GuoAnxin";
+// 站点名称（头像旁大字 Logo，显示为小写）
+const siteName = (import.meta.env.VITE_SITE_NAME || "GuoAnxin").toLowerCase();
 
 // 简介区域文字
 const descriptionText = reactive({

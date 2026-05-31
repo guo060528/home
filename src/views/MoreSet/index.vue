@@ -59,8 +59,8 @@ import config from "@/../package.json";
 const store = mainStore();
 const closeShow = ref(false);
 
-// 站点名称（设置页大字 Logo）
-const siteName = import.meta.env.VITE_SITE_NAME || "GuoAnxin";
+// 站点名称（设置页大字 Logo，显示为小写）
+const siteName = (import.meta.env.VITE_SITE_NAME || "GuoAnxin").toLowerCase();
 
 // 更新日志
 const upData = reactive({
