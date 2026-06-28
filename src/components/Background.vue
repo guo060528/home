@@ -29,6 +29,7 @@ import { Error } from "@icon-park/vue-next";
 
 const store = mainStore();
 const bgUrl = ref(null);
+const imgTimeout = ref(null);
 const emit = defineEmits(["loadComplete"]);
 
 // 壁纸随机数
@@ -42,7 +43,7 @@ const changeBg = (type) => {
   } else if (type == 1) {
     bgUrl.value = "https://api.dujin.org/bing/1920.php";
   } else if (type == 2) {
-    bgUrl.value = `/images/background${bgRandom}.webp`;
+    bgUrl.value = `/images/background${bgRandom}.jpg`;
   } else if (type == 3) {
     bgUrl.value = "https://api.btstu.cn/sjbz/api.php?lx=dongman";
   }
@@ -50,7 +51,12 @@ const changeBg = (type) => {
 
 // 图片加载完成
 const imgLoadComplete = () => {
-  store.setImgLoadStatus(true);
+  imgTimeout.value = setTimeout(
+    () => {
+      store.setImgLoadStatus(true);
+    },
+    Math.floor(Math.random() * (600 - 300 + 1)) + 300,
+  );
 };
 
 // 图片动画完成
@@ -85,6 +91,10 @@ onMounted(() => {
   // 加载壁纸
   changeBg(store.coverType);
 });
+
+onBeforeUnmount(() => {
+  clearTimeout(imgTimeout.value);
+});
 </script>
 
 <style lang="scss" scoped>
@@ -113,7 +123,8 @@ onMounted(() => {
     transition:
       filter 0.3s,
       transform 0.3s;
-    animation: fade 0.6s ease-out forwards;
+    animation: fade-blur-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 0.45s;
   }
   .gray {
     opacity: 1;

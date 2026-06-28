@@ -90,7 +90,6 @@ export default ({ mode }) =>
         },
       }),
       viteCompression(),
-      viteCompression({ algorithm: "brotliCompress" }),
     ],
     server: {
       port: "3000",
@@ -117,15 +116,6 @@ export default ({ mode }) =>
       terserOptions: {
         compress: {
           pure_funcs: ["console.log"],
-        },
-      },
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vue: ["vue", "pinia"],
-            elementPlus: ["element-plus"],
-            swiper: ["swiper"],
-          },
         },
       },
     },
