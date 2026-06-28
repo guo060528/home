@@ -31,10 +31,6 @@ p {
   text-decoration: none;
   color: #fff;
   box-sizing: border-box;
-
-  &:hover {
-    transition: 0.3s;
-  }
 }
 
 // 链接悬停效果
@@ -47,7 +43,7 @@ a:hover {
 @font-face {
   font-family: "Pacifico-Regular";
   font-display: swap;
-  src: url("/font/Pacifico-Regular.ttf") format("truetype");
+  src: url("/font/Pacifico-Regular.woff2") format("woff2");
 }
 
 @font-face {
@@ -166,26 +162,6 @@ a:hover {
   }
   to {
     opacity: 1;
-  }
-}
-
-@keyframes fade-blur-in {
-  from {
-    filter: blur(20px) brightness(0.3);
-    transform: scale(1.6);
-  }
-  to {
-    filter: blur(0) brightness(1);
-    transform: scale(1);
-  }
-}
-
-@keyframes fade-blur-main-in {
-  from {
-    transform: scale(1.2);
-  }
-  to {
-    transform: scale(1);
   }
 }
 
