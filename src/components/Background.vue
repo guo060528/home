@@ -106,6 +106,7 @@ onMounted(() => {
     height: 100%;
     object-fit: cover;
     backface-visibility: hidden;
+    animation: fade 0.4s ease;
   }
   .gray {
     opacity: 1;

@@ -131,6 +131,7 @@ onBeforeUnmount(() => {
   left: 0;
   width: 100%;
   height: 100%;
+  animation: fade 0.4s ease;
   .container {
     width: 100%;
     height: 100vh;

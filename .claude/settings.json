@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m ' *)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'feat: 首屏占位底色按昼夜切换并加入短渐入动画 *)"
+    ]
+  }
+}
