@@ -1,5 +1,3 @@
-import { isEqual } from "lodash-es";
-
 let mainCursor;
 
 const lerp = (a, b, n) => {
@@ -7,15 +5,6 @@ const lerp = (a, b, n) => {
     return b;
   }
   return (1 - n) * a + n * b;
-};
-
-const getStyle = (el, attr) => {
-  try {
-    return window.getComputedStyle ? window.getComputedStyle(el)[attr] : el.currentStyle[attr];
-  } catch (e) {
-    console.error(e);
-  }
-  return false;
 };
 
 const cursorInit = () => {
@@ -29,10 +18,9 @@ class Cursor {
       curr: null,
       prev: null,
     };
-    this.pt = [];
+    this.animating = false;
     this.create();
     this.init();
-    this.render();
   }
 
   move(left, top) {
@@ -49,36 +37,24 @@ class Cursor {
       document.body.append(this.cursor);
     }
 
-    var el = document.getElementsByTagName("*");
-    for (let i = 0; i < el.length; i++)
-      if (getStyle(el[i], "cursor") == "pointer") this.pt.push(el[i].outerHTML);
-
     document.body.appendChild((this.scr = document.createElement("style")));
     this.scr.innerHTML = `* {cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' width='10px' height='10px'><circle cx='4' cy='4' r='4' fill='white' /></svg>") 4 4, auto !important}`;
-  }
-  refresh() {
-    this.scr.remove();
-    this.cursor.classList.remove("active");
-    this.pos = {
-      curr: null,
-      prev: null,
-    };
-    this.pt = [];
-
-    this.create();
-    this.init();
-    this.render();
   }
 
   init() {
     document.onmousemove = (e) => {
-      this.pos.curr == null && this.move(e.clientX - 8, e.clientY - 8);
+      if (this.pos.curr == null) {
+        this.move(e.clientX - 8, e.clientY - 8);
+      }
       this.pos.curr = {
         x: e.clientX - 8,
         y: e.clientY - 8,
       };
       this.cursor.classList.remove("hidden");
-      this.render();
+      if (!this.animating) {
+        this.animating = true;
+        this.render();
+      }
     };
     document.onmouseenter = () => this.cursor.classList.remove("hidden");
     document.onmouseleave = () => this.cursor.classList.add("hidden");
@@ -94,8 +70,12 @@ class Cursor {
     } else {
       this.pos.prev = this.pos.curr;
     }
-    if (!isEqual(this.pos.curr, this.pos.prev)) {
+    const diffX = Math.abs(this.pos.curr.x - this.pos.prev.x);
+    const diffY = Math.abs(this.pos.curr.y - this.pos.prev.y);
+    if (diffX > 0.5 || diffY > 0.5) {
       requestAnimationFrame(() => this.render());
+    } else {
+      this.animating = false;
     }
   }
 }

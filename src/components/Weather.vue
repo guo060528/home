@@ -50,14 +50,51 @@ const getTemperature = (min, max) => {
   }
 };
 
+// 天气缓存（10 分钟内复用，减少接口请求）
+const WEATHER_CACHE_KEY = "weather-cache";
+const WEATHER_CACHE_TTL = 10 * 60 * 1000;
+
+// 读取缓存
+const readWeatherCache = () => {
+  try {
+    const raw = localStorage.getItem(WEATHER_CACHE_KEY);
+    if (!raw) return null;
+    const cache = JSON.parse(raw);
+    if (Date.now() - cache.time > WEATHER_CACHE_TTL) return null;
+    return cache.data;
+  } catch {
+    return null;
+  }
+};
+
+// 写入缓存
+const writeWeatherCache = () => {
+  try {
+    localStorage.setItem(
+      WEATHER_CACHE_KEY,
+      JSON.stringify({
+        time: Date.now(),
+        data: { adCode: weatherData.adCode, weather: weatherData.weather },
+      }),
+    );
+  } catch {
+    // 忽略写入失败
+  }
+};
+
 // 获取天气数据
 const getWeatherData = async () => {
+  // 优先使用有效缓存
+  const cached = readWeatherCache();
+  if (cached) {
+    weatherData.adCode = cached.adCode;
+    weatherData.weather = cached.weather;
+    return;
+  }
   try {
     // 获取地理位置信息
     if (!mainKey) {
-      console.log("未配置，使用备用天气接口");
       const result = await getOtherWeather();
-      console.log(result);
       const data = result.result;
       weatherData.adCode = {
         city: data.city.City || "未知地区",
@@ -72,7 +109,6 @@ const getWeatherData = async () => {
     } else {
       // 获取 Adcode
       const adCode = await getAdcode(mainKey);
-      console.log(adCode);
       if (adCode.infocode !== "10000") {
         throw "地区查询失败";
       }
@@ -89,6 +125,8 @@ const getWeatherData = async () => {
         windpower: result.lives[0].windpower,
       };
     }
+    // 成功后写入缓存
+    writeWeatherCache();
   } catch (error) {
     console.error("天气信息获取失败:" + error);
     onError("天气信息获取失败");

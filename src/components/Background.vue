@@ -29,7 +29,6 @@ import { Error } from "@icon-park/vue-next";
 
 const store = mainStore();
 const bgUrl = ref(null);
-const imgTimeout = ref(null);
 const emit = defineEmits(["loadComplete"]);
 
 // 壁纸随机数
@@ -51,17 +50,12 @@ const changeBg = (type) => {
 
 // 图片加载完成
 const imgLoadComplete = () => {
-  imgTimeout.value = setTimeout(
-    () => {
-      store.setImgLoadStatus(true);
-    },
-    Math.floor(Math.random() * (600 - 300 + 1)) + 300,
-  );
+  // 壁纸 API 加载完成后立即显示主界面（直接渐入）
+  store.setImgLoadStatus(true);
 };
 
 // 图片动画完成
 const imgAnimationEnd = () => {
-  console.log("壁纸加载且动画完成");
   // 加载完成事件
   emit("loadComplete");
 };
@@ -90,10 +84,6 @@ watch(
 onMounted(() => {
   // 加载壁纸
   changeBg(store.coverType);
-});
-
-onBeforeUnmount(() => {
-  clearTimeout(imgTimeout.value);
 });
 </script>
 

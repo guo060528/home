@@ -42,11 +42,14 @@ const startDate = ref(import.meta.env.VITE_SITE_START);
 const startDateText = ref(null);
 const timeInterval = ref(null);
 
+// 建站日期文本只需计算一次
+if (startDate.value) startDateText.value = siteDateStatistics(new Date(startDate.value));
+
 onMounted(() => {
+  // 时光胶囊仅显示小时/天，30 秒刷新一次即可，降低开销
   timeInterval.value = setInterval(() => {
     timeData.value = getTimeCapsule();
-    if (startDate.value) startDateText.value = siteDateStatistics(new Date(startDate.value));
-  }, 1000);
+  }, 30000);
 });
 
 onBeforeUnmount(() => {
