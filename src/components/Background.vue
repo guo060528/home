@@ -5,9 +5,10 @@
       :src="bgUrl"
       class="bg"
       alt="cover"
+      decoding="async"
+      fetchpriority="high"
       @load="imgLoadComplete"
       @error.once="imgLoadError"
-      @animationend="imgAnimationEnd"
     />
     <div :class="store.backgroundShow ? 'gray hidden' : 'gray'" />
     <Transition name="fade" mode="out-in">
@@ -50,13 +51,9 @@ const changeBg = (type) => {
 
 // 图片加载完成
 const imgLoadComplete = () => {
-  // 壁纸 API 加载完成后立即显示主界面（直接渐入）
+  // 壁纸 API 加载完成后立即显示主界面（无渐入动画）
   store.setImgLoadStatus(true);
-};
-
-// 图片动画完成
-const imgAnimationEnd = () => {
-  // 加载完成事件
+  // 加载完成事件（欢迎语、默哀模式）
   emit("loadComplete");
 };
 
@@ -109,12 +106,6 @@ onMounted(() => {
     height: 100%;
     object-fit: cover;
     backface-visibility: hidden;
-    filter: blur(20px) brightness(0.3);
-    transition:
-      filter 0.3s,
-      transform 0.3s;
-    animation: fade-blur-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    animation-delay: 0.45s;
   }
   .gray {
     opacity: 1;

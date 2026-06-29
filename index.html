@@ -14,6 +14,16 @@
     <meta name="author" content="%VITE_SITE_AUTHOR%" />
     <meta name="theme-color" content="#424242" />
     <title>%VITE_SITE_NAME%</title>
+    <!-- 预连接外部接口域名，提前完成 DNS + TLS 握手，加快首屏请求 -->
+    <link rel="preconnect" href="https://bingw.jasonzeng.dev" crossorigin />
+    <link rel="preconnect" href="https://v1.hitokoto.cn" crossorigin />
+    <link rel="preconnect" href="https://restapi.amap.com" crossorigin />
+    <link rel="preconnect" href="https://api.oioweb.cn" crossorigin />
+    <link rel="preconnect" href="https://s1.hdslb.com" crossorigin />
+    <link rel="dns-prefetch" href="https://bingw.jasonzeng.dev" />
+    <link rel="dns-prefetch" href="https://v1.hitokoto.cn" />
+    <link rel="dns-prefetch" href="https://restapi.amap.com" />
+    <link rel="dns-prefetch" href="https://api.oioweb.cn" />
     <!-- HarmonyOS Sans -->
     <!-- 本站 CDN 已开启防盗链，非本站域名不可访问，请更改链接为下方内容，否则自定义字体将失效 -->
     <link rel="stylesheet" href="https://s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" />
