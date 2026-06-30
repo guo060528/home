@@ -10,7 +10,7 @@
       @load="imgLoadComplete"
       @error.once="imgLoadError"
     />
-    <div :class="store.backgroundShow ? 'gray hidden' : 'gray'" />
+    <div v-show="store.imgLoadStatus" :class="store.backgroundShow ? 'gray hidden' : 'gray'" />
     <Transition name="fade" mode="out-in">
       <a
         v-if="store.backgroundShow && store.coverType != '3'"

@@ -38,15 +38,13 @@
   </head>
 
   <body>
-    <!-- 首屏占位底色：白天浅色 / 夜晚深色（壁纸加载完成前显示） -->
-    <script>
-      (function () {
-        var hour = new Date().getHours();
-        var color = hour >= 6 && hour < 18 ? "#ffffff" : "#000000";
-        document.documentElement.style.backgroundColor = color;
-        document.body.style.backgroundColor = color;
-      })();
-    </script>
+    <!-- 首屏占位底色：跟随系统主题 -->
+    <style>
+      html, body { background-color: #fff; }
+      @media (prefers-color-scheme: dark) {
+        html, body { background-color: #000; }
+      }
+    </style>
     <!-- 主体内容 -->
     <div id="app"></div>
     <!-- noscript -->
