@@ -37,9 +37,11 @@ const changeBg = (type) => {
   if (type == 0) {
     bgUrl.value = "https://bingw.jasonzeng.dev/?resolution=1920x1080&index=random";
   } else if (type == 1) {
-    bgUrl.value = "https://api.dujin.org/bing/1920.php";
+    // 每日一图（必应官方壁纸，302 跳转）
+    bgUrl.value = "https://api.paugram.com/bing/";
   } else if (type == 3) {
-    bgUrl.value = "https://api.btstu.cn/sjbz/api.php?lx=dongman";
+    // 随机动漫
+    bgUrl.value = "https://t.mwm.moe/pc";
   } else {
     // 本地壁纸已移除，兼容旧版持久化的默认壁纸选项，统一回退到随机风景
     bgUrl.value = "https://bingw.jasonzeng.dev/?resolution=1920x1080&index=random";
@@ -66,9 +68,9 @@ const imgLoadError = () => {
   });
   // 本地壁纸已移除，回退到备用在线壁纸源（避免和当前失败的源重复）
   bgUrl.value =
-    bgUrl.value === "https://api.dujin.org/bing/1920.php"
+    bgUrl.value === "https://api.paugram.com/bing/"
       ? "https://bingw.jasonzeng.dev/?resolution=1920x1080&index=random"
-      : "https://api.dujin.org/bing/1920.php";
+      : "https://api.paugram.com/bing/";
 };
 
 // 监听壁纸切换
