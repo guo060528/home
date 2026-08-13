@@ -1,5 +1,4 @@
-# Dev 分支推送部署预览
-# 仅部署 Win 端
+# 推送构建预览（构建产物通过 Actions artifact 的 zip 发布）
 name: Build Dev
 
 on:
@@ -7,12 +6,20 @@ on:
     branches:
       - dev
       - master
-  workflow_dispatch:  # ✅ 可选，允许你在 GitHub 网页手动运行
+  workflow_dispatch: # 允许在 GitHub 网页手动运行
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   release:
     name: Build Website
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       # 检出 Git 仓库
@@ -26,14 +33,12 @@ jobs:
           node-version: "20.x"
           cache: 'npm'
 
-      # 复制环境变量文件
-      - name: Copy .env.example
+      # 确保存在 .env（缺失时从模板复制）
+      - name: Ensure .env file
         run: |
-          if (-not (Test-Path .env)) {
-            Copy-Item .env.example .env
-          } else {
-            Write-Host ".env file already exists. Skipping the copy step."
-          }
+          if [ ! -f .env ]; then
+            cp .env.example .env
+          fi
 
       # 安装项目依赖
       - name: Install Dependencies
@@ -42,8 +47,6 @@ jobs:
       # 构建程序
       - name: Build Website
         run: npm run build
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
       # 上传构建产物
       - name: Upload artifacts

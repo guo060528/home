@@ -32,20 +32,17 @@ const store = mainStore();
 const bgUrl = ref(null);
 const emit = defineEmits(["loadComplete"]);
 
-// 壁纸随机数
-// 请依据文件夹内的图片个数修改 Math.random() 后面的第一个数字
-const bgRandom = Math.floor(Math.random() * 10 + 1);
-
 // 更换壁纸链接
 const changeBg = (type) => {
   if (type == 0) {
     bgUrl.value = "https://bingw.jasonzeng.dev/?resolution=1920x1080&index=random";
   } else if (type == 1) {
     bgUrl.value = "https://api.dujin.org/bing/1920.php";
-  } else if (type == 2) {
-    bgUrl.value = `/images/background${bgRandom}.jpg`;
   } else if (type == 3) {
     bgUrl.value = "https://api.btstu.cn/sjbz/api.php?lx=dongman";
+  } else {
+    // 本地壁纸已移除，兼容旧版持久化的默认壁纸选项，统一回退到随机风景
+    bgUrl.value = "https://bingw.jasonzeng.dev/?resolution=1920x1080&index=random";
   }
 };
 
@@ -61,13 +58,17 @@ const imgLoadComplete = () => {
 const imgLoadError = () => {
   console.error("壁纸加载失败：", bgUrl.value);
   ElMessage({
-    message: "壁纸加载失败，已临时切换回默认",
+    message: "壁纸加载失败，已临时切换壁纸源",
     icon: h(Error, {
       theme: "filled",
       fill: "#efefef",
     }),
   });
-  bgUrl.value = `/images/background${bgRandom}.jpg`;
+  // 本地壁纸已移除，回退到备用在线壁纸源（避免和当前失败的源重复）
+  bgUrl.value =
+    bgUrl.value === "https://api.dujin.org/bing/1920.php"
+      ? "https://bingw.jasonzeng.dev/?resolution=1920x1080&index=random"
+      : "https://api.dujin.org/bing/1920.php";
 };
 
 // 监听壁纸切换
